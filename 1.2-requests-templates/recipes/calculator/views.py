@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 DATA = {
@@ -28,3 +29,13 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+def recipe_page(request, recipe_name):
+    servings = int(request.GET.get('servings', 1))
+    target_recipe = DATA.get(recipe_name, None)
+    if target_recipe:
+        temp = {key: round(value * servings, 2) for key, value in target_recipe.items()}
+        context = {'target_recipe': temp}
+    else:
+        context = target_recipe
+    return render(request, 'calculator/index.html', context)
