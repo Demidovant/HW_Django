@@ -20,8 +20,12 @@
 
     <div class="date-block">
       <span class="date-item">Перейти к:</span>
-      <a class="date-item" href="{{ previous_book.pub_date|date:'Y-m-j' }}/">Предыдущей дате</a>
-      <a class="date-item" href="{{ next_book.pub_date|date:'Y-m-j' }}/">Следующей дате</a>
+        {% if previous_book != None %}
+            <a class="date-item" href="{{ previous_book.pub_date|date:'Y-m-j' }}/">Предыдущей дате</a>
+        {% endif %}
+        {% if next_book != None %}
+            <a class="date-item" href="{{ next_book.pub_date|date:'Y-m-j' }}/">Следующей дате</a>
+        {% endif %}
     </div>
 
     </div>
