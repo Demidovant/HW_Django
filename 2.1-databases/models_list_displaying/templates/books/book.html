@@ -13,12 +13,16 @@
             <h3>{{ book.name }}</h3>
           </a>
           <div class="author">Автор: {{ book.author }} </div>
-          <div class="pub_date">
-              <a class="date-item" href="{{ book.pub_date|date:'Y-m-j' }}/">Дата: {{ book.pub_date }}</a>
-          </div>
+          <div class="pub_date">Дата: {{ book.pub_date }} </div>
             <br>
         </div>
       {% endfor %}
+
+    <div class="date-block">
+      <span class="date-item">Перейти к:</span>
+      <a class="date-item" href="{{ previous_book.pub_date|date:'Y-m-j' }}/">Предыдущей дате</a>
+      <a class="date-item" href="{{ next_book.pub_date|date:'Y-m-j' }}/">Следующей дате</a>
+    </div>
 
     </div>
     </div>
