@@ -17,6 +17,7 @@ class Measurement(models.Model):
     sensor_id = models.ForeignKey(Sensor, related_name='measurements', on_delete=models.CASCADE)
     temperature = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(max_length=50, default=None, null=True)
 
 
 class Meta:
