@@ -128,17 +128,17 @@ def students_quantity():
 
 
 @pytest.mark.parametrize(
-    ['students_count', 'expected_status'],
+    ['students_count'],
     (
-            (20, 201),
-            (21, 400),
-            (1000, 400),
-            (10, 201),
-            (1, 201),
+            (20,),
+            (21,),
+            (1000,),
+            (10,),
+            (1,),
     )
 )
 @pytest.mark.django_db
-def test_students_quantity(client, students_count, expected_status, student_factory):
+def test_students_quantity(client, students_count, student_factory, students_quantity):
     student = student_factory(_quantity=1)
     students_list = [student[0].pk] * students_count
     url = reverse('courses-list')
@@ -147,4 +147,7 @@ def test_students_quantity(client, students_count, expected_status, student_fact
         'students': students_list
     }
     response = client.post(url, data=data)
-    assert response.status_code == expected_status
+    if students_count > students_quantity:
+        assert response.status_code == 400
+    else:
+        assert response.status_code == 201
